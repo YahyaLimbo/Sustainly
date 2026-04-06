@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.azure.cosmos.models.PartitionKey; 
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,6 +18,10 @@ public class RentService {
     @Autowired
     private RabbitMQProducer rabbitMQProducer;
     
+    public List<RentRequest> getRequestsByRenter(String renterId) {
+        return rentRepository.findByRenterId(renterId);
+    }
+
     //create an item request
     public RentRequest createRequest(RentRequest request){
         if (request.getId() == null || request.getId().isEmpty()) {

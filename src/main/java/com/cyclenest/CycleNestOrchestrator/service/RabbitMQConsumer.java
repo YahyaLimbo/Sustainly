@@ -30,12 +30,13 @@ public class RabbitMQConsumer {
                 Item item = items.get(0); 
                 
                 rentRepository.save(request);
-                System.out.println("Parsed and Saved ID: " + request.getId());
+                System.out.println("Successfully saved RentRequest. ID: " + request.getId() + ", Renter: " + request.getRenterId());
                 
             } 
             else {
                 System.err.println("Item NOT FOUND in Database list: " + request.getItemId());
                 rentRepository.save(request);
+                System.out.println("Saved RentRequest anyway (Item missing). ID: " + request.getId() + ", Renter: " + request.getRenterId());
             }
 
         } catch (Exception e) {
